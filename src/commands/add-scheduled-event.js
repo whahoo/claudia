@@ -48,7 +48,7 @@ module.exports = function addScheduledEvent(options) {
 				Targets: [
 					{
 						Arn: lambdaConfig.arn,
-						Id: `${lambdaConfig.name}-${options.version}-${Date.now()}`,
+						Id: `${lambdaConfig.name}-${options.version}`,
 						Input: eventData
 					}
 				]

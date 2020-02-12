@@ -185,5 +185,31 @@ describe('addScheduledEvent', () => {
 			})
 			.then(done, done.fail);
 		});
+		it('does not duplicate target if run twice', done => {
+			let functionArn;
+			createConfig.version = 'no_dup';
+			config.version = 'no_dup';
+
+			createLambda()
+			.then(() => {
+				return lambda.getFunctionConfiguration({
+					FunctionName: testRunName,
+					Qualifier: 'no_dup'
+				}).promise();
+			})
+			.then(lambdaResult => {
+				functionArn = lambdaResult.FunctionArn;
+				console.log(functionArn);
+			})
+                .then(() => underTest(config))
+                .then(() => underTest(config))
+			.then(() => events.listTargetsByRule({Rule: config.name}).promise())
+			.then(config => {
+				expect(config.Targets.length).toBe(1);
+				expect(config.Targets[0].Arn).toEqual(functionArn);
+				expect(eventConfig).toEqual(JSON.parse(config.Targets[0].Input));
+			})
+			.then(done, done.fail);
+		});
 	});
 });
