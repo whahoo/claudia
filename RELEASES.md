@@ -1,5 +1,21 @@
 # Release history
 
+### 5.12.0 (8 January 2020)
+
+- support for `--s3-key` while creating and updating functions, combined with `--use-s3-bucket`, to specify the destination key. (Thanks to [Chris Barnaby](https://github.com/cjbarnaby))
+
+### 5.11.0 (20 November 2019)
+
+- support for listing deployed versions, using `claudia list`
+
+### 5.10.0 (19 November 2019)
+
+- support for Lambda runtime nodejs12.x
+
+### 5.9.2 (6 November 2019)
+
+- updated docs for create, listing supported regions (thanks to [Claudio Acioli](https://github.com/claudioacioli)).
+
 ### 5.9.1 (21 October 2019)
 
 - fixing npm dependency vulnerabilities

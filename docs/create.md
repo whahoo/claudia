@@ -10,7 +10,8 @@ claudia create {OPTIONS}
 
 ## Options
 
-*  `--region`:  AWS region where to create the lambda
+*  `--region`:  AWS region where to create the lambda. For supported values, see
+    https://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region
     * _For example_: us-east-1
 *  `--handler`:  (_optional_) Main function for Lambda to execute, as module.function
     * _For example_: if it is in the main.js file and exported as router, this would be main.router
@@ -44,7 +45,7 @@ claudia create {OPTIONS}
     * _For example_: arn:aws:iam::123456789012:role/FileConverter
 *  `--runtime`:  (_optional_) Node.js runtime to use. For supported values, see
     http://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html
-    * _Defaults to_: nodejs10.x
+    * _Defaults to_: nodejs12.x
 *  `--description`:  (_optional_) Textual description of the lambda function
     * _Defaults to_: the project description from package.json
 *  `--memory`:  (_optional_) The amount of memory, in MB, your Lambda function is given.
@@ -68,8 +69,11 @@ claudia create {OPTIONS}
     If not set, the temporary files will be removed after the Lambda function is successfully created
 *  `--use-s3-bucket`:  (_optional_) The name of a S3 bucket that Claudia will use to upload the function code before installing in Lambda.
     You can use this to upload large functions over slower connections more reliably, and to leave a binary artifact
-    after uploads for auditing purposes. If not set, the archive will be uploaded directly to Lambda
+    after uploads for auditing purposes. If not set, the archive will be uploaded directly to Lambda.
+    
     * _For example_: claudia-uploads
+*  `--s3-key`:  (_optional_) The key to which the function code will be uploaded in the s3 bucket referenced in `--use-s3-bucket`
+    * _For example_: path/to/file.zip
 *  `--s3-sse`:  (_optional_) The type of Server Side Encryption applied to the S3 bucket referenced in `--use-s3-bucket`
     * _For example_: AES256
 *  `--aws-delay`:  (_optional_) number of milliseconds betweeen retrying AWS operations if they fail
